@@ -35,6 +35,6 @@ export class UserEntity {
 
     // @ApiProperty()
     // @Column()
-    // phoneNumber: string
+    // avatar: string
 
 }
