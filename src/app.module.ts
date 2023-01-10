@@ -11,22 +11,29 @@ import { DB_CONFIG } from './UTILS/db_config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ProductsService } from './products/products.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
+// import { EmailModule } from './email/email.module';
 import * as path from 'path';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
   TypeOrmModule.forRoot(DB_CONFIG),
   ServeStaticModule.forRoot({rootPath: path.resolve(__dirname, 'static')}),
-  MailerModule.forRoot({
-    transport:{
-      host:process.env.MAIL_HOST,
-      auth:{
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS
-      }
-    }
+  ConfigModule.forRoot({
+    isGlobal:true
   }),
-    AuthModule, UsersModule, ProductsModule, 
+  // MailerModule.forRoot({
+  //   transport:{
+  //     host:process.env.MAIL_HOST,
+  //     auth:{
+  //       user: process.env.MAIL_USER,
+  //       pass: process.env.MAIL_PASS
+  //     }
+  //   }
+  // }),
+    AuthModule,
+     UsersModule, ProductsModule, 
+    // EmailModule, 
     // MailModule, 
     // BasketModule
   ],
